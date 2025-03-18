@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSyncAI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>ShopSyncAI</h1>
+        <input type="text" id="search" placeholder="Пошук товарів...">
+    </header>
+    <main>
+        <div id="filters">
+            <select id="categoryFilter">
+                <option value="">Усі категорії</option>
+                <option value="одяг">Одяг</option>
+                <option value="взуття">Взуття</option>
+                <option value="аксесуари">Аксесуари</option>
+            </select>
+        </div>
+        <div id="products"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
