@@ -1,31 +1,223 @@
 <!DOCTYPE html>
 <html lang="uk">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopSyncAI</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Фіксований банер зверху */
+        .top-banner {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #f0f0f0;
+            text-align: center;
+            z-index: 1000;
+            border-bottom: 2px solid #ccc;
+        }
+        .top-banner img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Контент */
+        header {
+            text-align: center;
+            margin-top: 100px; /* Щоб не перекривався верхнім банером */
+        }
+        #search {
+            margin: 10px 0;
+            padding: 5px;
+            width: 200px;
+        }
+        #filters {
+            margin: 20px 0;
+            text-align: center;
+        }
+        #products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product, .ad-inline {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            width: 300px;
+            height: 400px;
+            box-sizing: border-box;
+        }
+        .product img, .ad-inline img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        /* Банер перед футером */
+        .bottom-banner {
+            width: 100%;
+            background: #f0f0f0;
+            text-align: center;
+            border-top: 2px solid #ccc;
+        }
+        .bottom-banner img {
+            max-width: 100%;
+            height: auto;
+        }
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Фіксований банер зверху -->
+    <div class="top-banner">
+        <a href="https://example-shop1.com" target="_blank">
+            <img src="https://via.placeholder.com/728x90?text=Top+Banner+Ad" alt="Верхня реклама">
+        </a>
+    </div>
+
+    <!-- Основний контент -->
     <header>
         <h1>ShopSyncAI</h1>
         <input type="text" id="search" placeholder="Пошук товарів...">
     </header>
-    <main>
-        <div id="filters">
-            <select id="categoryFilter">
-                <option value="">Усі категорії</option>
-                <option value="одяг">Одяг</option>
-                <option value="взуття">Взуття</option>
-                <option value="аксесуари">Аксесуари</option>
-            </select>
-        </div>
-        <div id="products"></div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
-</body>
+    <div id="filters">
+        <select id="categoryFilter">
+            <option value="">Усі категорії</option>
+            <option value="одяг">Одяг</option>
+            <option value="взуття">Взуття</option>
+            <option value="аксесуари">Аксесуари</option>
+        </select>
+    </div>
+    <div id="products">
+        <!-- Товари додаватимуться через JavaScript -->
+    </div>
 
+    <!-- Банер перед футером -->
+    <div class="bottom-banner">
+        <a href="https://example-shop2.com" target="_blank">
+            <img src="https://via.placeholder.com/728x90?text=Bottom+Banner+Ad" alt="Нижня реклама">
+        </a>
+    </div>
+
+    <!-- Футер -->
+    <div class="footer">
+        <p>© 2025 ShopSyncAI</p>
+    </div>
+
+    <!-- Підключення Supabase і скрипт -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const { createClient } = supabase;
+        const supabaseClient = createClient('твій_supabase_url', 'твій_supabase_key');
+
+        // Завантаження товарів
+        async function loadProducts() {
+            const { data, error } = await supabaseClient.from('products').select('*');
+            if (error) {
+                console.error('Помилка:', error);
+                return;
+            }
+
+            const productsDiv = document.getElementById('products');
+            productsDiv.innerHTML = '';
+            data.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.title}">
+                    <h3>${product.title}</h3>
+                    <p>${product.description.slice(0, 100)}...</p>
+                    <p>Ціна: ${product.price}</p>
+                    <p>Продавець: @${product.seller_username}</p>
+                    <a href="https://t.me/${product.seller_username}" target="_blank">Купити</a>
+                `;
+                productsDiv.appendChild(productDiv);
+            });
+
+            // Додавання 5 рандомних реклам
+            addRandomAds();
+        }
+
+        // Функція для додавання рандомних реклам
+        function addRandomAds() {
+            const products = document.querySelectorAll('.product');
+            const adLinks = [
+                'https://example-shop3.com',
+                'https://example-shop4.com',
+                'https://example-shop5.com',
+                'https://example-shop6.com',
+                'https://example-shop7.com'
+            ];
+            const adCount = Math.min(5, products.length); // Не більше ніж товарів
+
+            for (let i = 0; i < adCount; i++) {
+                const adDiv = document.createElement('div');
+                adDiv.className = 'ad-inline';
+                adDiv.innerHTML = `
+                    <a href="${adLinks[i]}" target="_blank">
+                        <img src="https://via.placeholder.com/300x250?text=Ad+${i+1}" alt="Реклама ${i+1}">
+                        <h3>Реклама магазину</h3>
+                        <p>Відвідай наш сайт!</p>
+                    </a>
+                `;
+                const randomIndex = Math.floor(Math.random() * products.length);
+                products[randomIndex].after(adDiv);
+            }
+        }
+
+        // Фільтри та пошук
+        async function loadProductsWithFilters() {
+            const category = document.getElementById('categoryFilter').value;
+            const search = document.getElementById('search').value.toLowerCase();
+
+            let query = supabaseClient.from('products').select('*');
+            if (category) query = query.eq('category', category);
+
+            const { data, error } = await query;
+            if (error) {
+                console.error('Помилка:', error);
+                return;
+            }
+
+            const filteredData = data.filter(product =>
+                product.title.toLowerCase().includes(search) ||
+                product.description.toLowerCase().includes(search)
+            );
+
+            const productsDiv = document.getElementById('products');
+            productsDiv.innerHTML = '';
+            filteredData.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.title}">
+                    <h3>${product.title}</h3>
+                    <p>${product.description.slice(0, 100)}...</p>
+                    <p>Ціна: ${product.price}</p>
+                    <p>Продавець: @${product.seller_username}</p>
+                    <a href="https://t.me/${product.seller_username}" target="_blank">Купити</a>
+                `;
+                productsDiv.appendChild(productDiv);
+            });
+
+            addRandomAds();
+        }
+
+        // Події для фільтрів і пошуку
+        document.getElementById('categoryFilter').addEventListener('change', loadProductsWithFilters);
+        document.getElementById('search').addEventListener('input', loadProductsWithFilters);
+
+        // Завантаження при старті
+        loadProducts();
+    </script>
+</body>
 </html>
