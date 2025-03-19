@@ -52,16 +52,16 @@
         }
         /* Контент */
         #products {
-            position: relative; /* Для позиціонування банера відносно цього блоку */
+            position: relative;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            min-height: 100vh; /* Щоб банер не обрізався */
+            min-height: 100vh;
         }
-        /* Фіксований банер у блоці контенту */
+        /* Фіксований банер у блоці контенту (менша висота) */
         .top-banner {
             position: sticky;
             top: 0;
@@ -70,11 +70,11 @@
             text-align: center;
             z-index: 10;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            grid-column: 1 / -1; /* Розтягується на всю ширину сітки */
+            grid-column: 1 / -1;
         }
         .top-banner img {
             max-width: 100%;
-            height: auto;
+            height: 60px; /* Зменшена висота */
             border-radius: 5px;
         }
         .product, .ad-inline {
@@ -117,17 +117,19 @@
         .product a:hover, .ad-inline a:hover {
             background: #ff9f1c;
         }
-        /* Банер перед футером */
+        /* Банер перед футером (вища висота, менша ширина) */
         .bottom-banner {
-            width: 100%;
+            width: 80%; /* Зменшена ширина */
+            max-width: 600px; /* Максимальна ширина */
+            margin: 0 auto; /* Центрування */
             background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
-            padding: 10px 0;
+            padding: 15px 0; /* Трохи більше вертикального простору */
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
         .bottom-banner img {
             max-width: 100%;
-            height: auto;
+            height: 120px; /* Збільшена висота */
             border-radius: 5px;
         }
         /* Футер */
@@ -161,7 +163,7 @@
     <div id="products">
         <div class="top-banner">
             <a href="https://example-shop1.com" target="_blank">
-                <img src="https://via.placeholder.com/728x90?text=Top+Banner+Ad" alt="Верхня реклама">
+                <img src="https://via.placeholder.com/728x60?text=Top+Banner+Ad" alt="Верхня реклама">
             </a>
         </div>
         <!-- Товари додаватимуться через JavaScript -->
@@ -170,7 +172,7 @@
     <!-- Банер перед футером -->
     <div class="bottom-banner">
         <a href="https://example-shop2.com" target="_blank">
-            <img src="https://via.placeholder.com/728x90?text=Bottom+Banner+Ad" alt="Нижня реклама">
+            <img src="https://via.placeholder.com/600x120?text=Bottom+Banner+Ad" alt="Нижня реклама">
         </a>
     </div>
 
@@ -194,9 +196,9 @@
             }
 
             const productsDiv = document.getElementById('products');
-            const topBanner = productsDiv.querySelector('.top-banner'); // Зберігаємо банер
-            productsDiv.innerHTML = ''; // Очищаємо
-            productsDiv.appendChild(topBanner); // Додаємо банер назад
+            const topBanner = productsDiv.querySelector('.top-banner');
+            productsDiv.innerHTML = '';
+            productsDiv.appendChild(topBanner);
 
             data.forEach(product => {
                 const productDiv = document.createElement('div');
