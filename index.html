@@ -61,11 +61,13 @@
             margin: 0 auto;
             min-height: 100vh;
         }
-        /* Фіксований банер у блоці контенту (менша висота) */
+        /* Фіксований банер у блоці контенту (обмежена ширина) */
         .top-banner {
             position: sticky;
             top: 0;
-            width: 100%;
+            max-width: 1200px; /* Така ж ширина, як у #products */
+            width: 100%; /* Адаптується до контейнера */
+            margin: 0 auto; /* Центрування */
             background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
             z-index: 10;
@@ -117,19 +119,19 @@
         .product a:hover, .ad-inline a:hover {
             background: #ff9f1c;
         }
-        /* Банер перед футером (вища висота, менша ширина) */
+        /* Банер перед футером */
         .bottom-banner {
-            width: 80%; /* Зменшена ширина */
-            max-width: 600px; /* Максимальна ширина */
-            margin: 0 auto; /* Центрування */
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
             background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
-            padding: 15px 0; /* Трохи більше вертикального простору */
+            padding: 15px 0;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
         .bottom-banner img {
             max-width: 100%;
-            height: 120px; /* Збільшена висота */
+            height: 120px;
             border-radius: 5px;
         }
         /* Футер */
