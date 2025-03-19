@@ -247,7 +247,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const { createClient } = supabase;
-        const supabaseClient = createClient('твій_supabase_url', 'твій_supabase_key');
+        const supabaseClient = createClient('https://ecralodmvqsbxnaspmxr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjcmFsb2RtdnFzYnhuYXNwbXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyMzkzNDIsImV4cCI6MjA1NzgxNTM0Mn0.Bey5B5sMQX72i9e6TUn5ycmZiYSgLNEoXhb14cwZYPI');
 
         async function loadProducts() {
             const { data, error } = await supabaseClient.from('products').select('*');
