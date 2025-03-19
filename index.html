@@ -62,30 +62,34 @@
             margin: 0 auto;
             min-height: 100vh;
         }
-        /* Верхній банер */
+        /* Верхній банер (зменшений) */
         .top-banner {
             position: sticky;
             top: 0;
-            max-width: 1200px;
+            max-width: 600px; /* Зменшена ширина */
             width: 100%;
-            margin: 0 auto;
+            margin: 10px auto; /* Відступи для центрування */
             background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
             z-index: 10;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             grid-column: 1 / -1;
-            padding: 5px 0;
+            padding: 5px;
+            border-radius: 8px;
         }
         .top-banner a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
             color: #fff;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
+            gap: 10px;
         }
         .top-banner img {
             max-width: 100%;
-            height: 50px; /* Компактніша висота */
+            height: 40px; /* Ще менша висота */
             border-radius: 5px;
             vertical-align: middle;
         }
@@ -143,15 +147,18 @@
             border-radius: 5px;
         }
         .bottom-banner a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
+            gap: 10px;
         }
         .bottom-banner img {
             max-width: 100%;
-            height: 100px; /* Вища, але компактніша */
+            height: 80px;
             border-radius: 5px;
             vertical-align: middle;
         }
@@ -177,11 +184,16 @@
                 grid-template-columns: 1fr;
                 padding: 10px;
             }
+            .top-banner {
+                max-width: 90%; /* Ще вужчий на мобільних */
+                margin: 5px auto;
+            }
             .top-banner img {
-                height: 40px; /* Ще менша висота на мобільних */
+                height: 30px; /* Ще менша висота */
             }
             .top-banner a {
-                font-size: 14px;
+                font-size: 12px;
+                gap: 5px;
             }
             .product, .ad-inline {
                 padding: 8px;
@@ -204,10 +216,11 @@
                 max-width: 400px;
             }
             .bottom-banner img {
-                height: 80px;
+                height: 60px;
             }
             .bottom-banner a {
-                font-size: 16px;
+                font-size: 14px;
+                gap: 5px;
             }
         }
     </style>
@@ -233,8 +246,8 @@
     <div id="products">
         <div class="top-banner">
             <a href="https://example-shop1.com" target="_blank">
-                <img src="https://via.placeholder.com/728x50?text=Top+Ad" alt="Верхня реклама">
-                <span>Акція від магазину!</span>
+                <img src="https://via.placeholder.com/600x40?text=Top+Ad" alt="Верхня реклама">
+                <span>Акція!</span>
             </a>
         </div>
     </div>
@@ -242,8 +255,8 @@
     <!-- Нижній банер -->
     <div class="bottom-banner">
         <a href="https://example-shop2.com" target="_blank">
-            <img src="https://via.placeholder.com/500x100?text=Bottom+Ad" alt="Нижня реклама">
-            <span>Кращі пропозиції тут!</span>
+            <img src="https://via.placeholder.com/500x80?text=Bottom+Ad" alt="Нижня реклама">
+            <span>Кращі пропозиції!</span>
         </a>
     </div>
 
