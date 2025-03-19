@@ -6,98 +6,164 @@
     <title>ShopSyncAI</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            background: #f5f5f5;
+            color: #333;
         }
-        /* Фіксований банер зверху */
-        .top-banner {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: #f0f0f0;
-            text-align: center;
-            z-index: 1000;
-            border-bottom: 2px solid #ccc;
-        }
-        .top-banner img {
-            max-width: 100%;
-            height: auto;
-        }
-        /* Контент */
+        /* Хедер із пошуком і фільтрами */
         header {
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-top: 100px; /* Щоб не перекривався верхнім банером */
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
         }
         #search {
-            margin: 10px 0;
-            padding: 5px;
-            width: 200px;
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
         }
-        #filters {
-            margin: 20px 0;
-            text-align: center;
+        #search:focus {
+            border-color: #ff6f61;
         }
+        #categoryFilter {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        #categoryFilter:hover, #categoryFilter:focus {
+            border-color: #ff6f61;
+        }
+        /* Контент */
         #products {
+            position: relative; /* Для позиціонування банера відносно цього блоку */
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh; /* Щоб банер не обрізався */
+        }
+        /* Фіксований банер у блоці контенту */
+        .top-banner {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #ff6f61, #ff9f1c);
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            grid-column: 1 / -1; /* Розтягується на всю ширину сітки */
+        }
+        .top-banner img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
         .product, .ad-inline {
-            border: 1px solid #ccc;
-            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px;
             text-align: center;
-            width: 300px;
-            height: 400px;
-            box-sizing: border-box;
+            transition: transform 0.2s;
+        }
+        .product:hover, .ad-inline:hover {
+            transform: translateY(-5px);
         }
         .product img, .ad-inline img {
             max-width: 100%;
             height: 200px;
             object-fit: cover;
+            border-radius: 8px;
+        }
+        .product h3, .ad-inline h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #ff6f61;
+        }
+        .product p, .ad-inline p {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+        }
+        .product a, .ad-inline a {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #ff6f61;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .product a:hover, .ad-inline a:hover {
+            background: #ff9f1c;
         }
         /* Банер перед футером */
         .bottom-banner {
             width: 100%;
-            background: #f0f0f0;
+            background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
-            border-top: 2px solid #ccc;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
         .bottom-banner img {
             max-width: 100%;
             height: auto;
+            border-radius: 5px;
         }
+        /* Футер */
         .footer {
             background: #333;
-            color: white;
+            color: #fff;
             text-align: center;
-            padding: 10px;
+            padding: 20px;
+            font-size: 14px;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Фіксований банер зверху -->
-    <div class="top-banner">
-        <a href="https://example-shop1.com" target="_blank">
-            <img src="https://via.placeholder.com/728x90?text=Top+Banner+Ad" alt="Верхня реклама">
-        </a>
-    </div>
-
-    <!-- Основний контент -->
+    <!-- Хедер із пошуком і фільтрами -->
     <header>
         <h1>ShopSyncAI</h1>
-        <input type="text" id="search" placeholder="Пошук товарів...">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Пошук товарів...">
+            <select id="categoryFilter">
+                <option value="">Усі категорії</option>
+                <option value="одяг">Одяг</option>
+                <option value="взуття">Взуття</option>
+                <option value="аксесуари">Аксесуари</option>
+                <option value="інше">Інше</option>
+            </select>
+        </div>
     </header>
-    <div id="filters">
-        <select id="categoryFilter">
-            <option value="">Усі категорії</option>
-            <option value="одяг">Одяг</option>
-            <option value="взуття">Взуття</option>
-            <option value="аксесуари">Аксесуари</option>
-        </select>
-    </div>
+
+    <!-- Контент із фіксованим банером зверху -->
     <div id="products">
+        <div class="top-banner">
+            <a href="https://example-shop1.com" target="_blank">
+                <img src="https://via.placeholder.com/728x90?text=Top+Banner+Ad" alt="Верхня реклама">
+            </a>
+        </div>
         <!-- Товари додаватимуться через JavaScript -->
     </div>
 
@@ -110,7 +176,7 @@
 
     <!-- Футер -->
     <div class="footer">
-        <p>© 2025 ShopSyncAI</p>
+        <p>© 2025 ShopSyncAI | Усі права захищено</p>
     </div>
 
     <!-- Підключення Supabase і скрипт -->
@@ -128,12 +194,15 @@
             }
 
             const productsDiv = document.getElementById('products');
-            productsDiv.innerHTML = '';
+            const topBanner = productsDiv.querySelector('.top-banner'); // Зберігаємо банер
+            productsDiv.innerHTML = ''; // Очищаємо
+            productsDiv.appendChild(topBanner); // Додаємо банер назад
+
             data.forEach(product => {
                 const productDiv = document.createElement('div');
                 productDiv.className = 'product';
                 productDiv.innerHTML = `
-                    <img src="${product.image_url}" alt="${product.title}">
+                    <img src="${product.image_url || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${product.title}">
                     <h3>${product.title}</h3>
                     <p>${product.description.slice(0, 100)}...</p>
                     <p>Ціна: ${product.price}</p>
@@ -143,7 +212,6 @@
                 productsDiv.appendChild(productDiv);
             });
 
-            // Додавання 5 рандомних реклам
             addRandomAds();
         }
 
@@ -157,16 +225,17 @@
                 'https://example-shop6.com',
                 'https://example-shop7.com'
             ];
-            const adCount = Math.min(5, products.length); // Не більше ніж товарів
+            const adCount = Math.min(5, products.length);
 
             for (let i = 0; i < adCount; i++) {
                 const adDiv = document.createElement('div');
                 adDiv.className = 'ad-inline';
                 adDiv.innerHTML = `
                     <a href="${adLinks[i]}" target="_blank">
-                        <img src="https://via.placeholder.com/300x250?text=Ad+${i+1}" alt="Реклама ${i+1}">
-                        <h3>Реклама магазину</h3>
-                        <p>Відвідай наш сайт!</p>
+                        <img src="https://via.placeholder.com/300x200?text=Ad+${i+1}" alt="Реклама ${i+1}">
+                        <h3>Супер пропозиція!</h3>
+                        <p>Відвідай наш магазин для найкращих цін!</p>
+                        <span>Дізнатися більше</span>
                     </a>
                 `;
                 const randomIndex = Math.floor(Math.random() * products.length);
@@ -194,12 +263,15 @@
             );
 
             const productsDiv = document.getElementById('products');
+            const topBanner = productsDiv.querySelector('.top-banner');
             productsDiv.innerHTML = '';
+            productsDiv.appendChild(topBanner);
+
             filteredData.forEach(product => {
                 const productDiv = document.createElement('div');
                 productDiv.className = 'product';
                 productDiv.innerHTML = `
-                    <img src="${product.image_url}" alt="${product.title}">
+                    <img src="${product.image_url || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${product.title}">
                     <h3>${product.title}</h3>
                     <p>${product.description.slice(0, 100)}...</p>
                     <p>Ціна: ${product.price}</p>
@@ -212,7 +284,7 @@
             addRandomAds();
         }
 
-        // Події для фільтрів і пошуку
+        // Події
         document.getElementById('categoryFilter').addEventListener('change', loadProductsWithFilters);
         document.getElementById('search').addEventListener('input', loadProductsWithFilters);
 
