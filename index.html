@@ -12,26 +12,27 @@
             background: #f5f5f5;
             color: #333;
         }
-        /* Хедер із пошуком і фільтрами */
+        /* Хедер */
         header {
-            padding: 20px;
+            padding: 15px;
             background: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .search-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin: 20px 0;
+            margin: 15px 0;
         }
         #search {
-            padding: 10px;
-            width: 300px;
+            padding: 8px;
+            width: 250px;
             border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
+            border-radius: 20px;
+            font-size: 14px;
             outline: none;
             transition: border-color 0.3s;
         }
@@ -39,10 +40,10 @@
             border-color: #ff6f61;
         }
         #categoryFilter {
-            padding: 10px;
+            padding: 8px;
             border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
+            border-radius: 20px;
+            font-size: 14px;
             background: #fff;
             cursor: pointer;
             transition: border-color 0.3s;
@@ -54,36 +55,46 @@
         #products {
             position: relative;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 15px;
             max-width: 1200px;
             margin: 0 auto;
             min-height: 100vh;
         }
-        /* Фіксований банер у блоці контенту (обмежена ширина) */
+        /* Верхній банер */
         .top-banner {
             position: sticky;
             top: 0;
-            max-width: 1200px; /* Така ж ширина, як у #products */
-            width: 100%; /* Адаптується до контейнера */
-            margin: 0 auto; /* Центрування */
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
             background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
             z-index: 10;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             grid-column: 1 / -1;
+            padding: 5px 0;
+        }
+        .top-banner a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
         }
         .top-banner img {
             max-width: 100%;
-            height: 60px; /* Зменшена висота */
+            height: 50px; /* Компактніша висота */
             border-radius: 5px;
+            vertical-align: middle;
         }
+        /* Товари та реклама */
         .product, .ad-inline {
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            padding: 15px;
+            padding: 10px;
             text-align: center;
             transition: transform 0.2s;
         }
@@ -92,61 +103,118 @@
         }
         .product img, .ad-inline img {
             max-width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             border-radius: 8px;
         }
         .product h3, .ad-inline h3 {
-            font-size: 18px;
-            margin: 10px 0;
+            font-size: 16px;
+            margin: 8px 0;
             color: #ff6f61;
         }
         .product p, .ad-inline p {
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
             margin: 5px 0;
         }
         .product a, .ad-inline a {
             display: inline-block;
-            padding: 8px 15px;
+            padding: 6px 12px;
             background: #ff6f61;
             color: #fff;
             text-decoration: none;
-            border-radius: 20px;
-            margin-top: 10px;
+            border-radius: 15px;
+            margin-top: 8px;
+            font-size: 13px;
             transition: background 0.3s;
         }
         .product a:hover, .ad-inline a:hover {
             background: #ff9f1c;
         }
-        /* Банер перед футером */
+        /* Нижній банер */
         .bottom-banner {
-            width: 80%;
-            max-width: 600px;
-            margin: 0 auto;
+            width: 90%;
+            max-width: 500px;
+            margin: 15px auto;
             background: linear-gradient(90deg, #ff6f61, #ff9f1c);
             text-align: center;
-            padding: 15px 0;
+            padding: 10px 0;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .bottom-banner a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
         }
         .bottom-banner img {
             max-width: 100%;
-            height: 120px;
+            height: 100px; /* Вища, але компактніша */
             border-radius: 5px;
+            vertical-align: middle;
         }
         /* Футер */
         .footer {
             background: #333;
             color: #fff;
             text-align: center;
-            padding: 20px;
-            font-size: 14px;
+            padding: 15px;
+            font-size: 12px;
+        }
+        /* Адаптивність для мобільних */
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            #search, #categoryFilter {
+                width: 100%;
+                max-width: 300px;
+            }
+            #products {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            .top-banner img {
+                height: 40px; /* Ще менша висота на мобільних */
+            }
+            .top-banner a {
+                font-size: 14px;
+            }
+            .product, .ad-inline {
+                padding: 8px;
+            }
+            .product img, .ad-inline img {
+                height: 150px;
+            }
+            .product h3, .ad-inline h3 {
+                font-size: 14px;
+            }
+            .product p, .ad-inline p {
+                font-size: 12px;
+            }
+            .product a, .ad-inline a {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+            .bottom-banner {
+                width: 95%;
+                max-width: 400px;
+            }
+            .bottom-banner img {
+                height: 80px;
+            }
+            .bottom-banner a {
+                font-size: 16px;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Хедер із пошуком і фільтрами -->
+    <!-- Хедер -->
     <header>
         <h1>ShopSyncAI</h1>
         <div class="search-container">
@@ -161,20 +229,21 @@
         </div>
     </header>
 
-    <!-- Контент із фіксованим банером зверху -->
+    <!-- Контент із верхнім банером -->
     <div id="products">
         <div class="top-banner">
             <a href="https://example-shop1.com" target="_blank">
-                <img src="https://via.placeholder.com/728x60?text=Top+Banner+Ad" alt="Верхня реклама">
+                <img src="https://via.placeholder.com/728x50?text=Top+Ad" alt="Верхня реклама">
+                <span>Акція від магазину!</span>
             </a>
         </div>
-        <!-- Товари додаватимуться через JavaScript -->
     </div>
 
-    <!-- Банер перед футером -->
+    <!-- Нижній банер -->
     <div class="bottom-banner">
         <a href="https://example-shop2.com" target="_blank">
-            <img src="https://via.placeholder.com/600x120?text=Bottom+Banner+Ad" alt="Нижня реклама">
+            <img src="https://via.placeholder.com/500x100?text=Bottom+Ad" alt="Нижня реклама">
+            <span>Кращі пропозиції тут!</span>
         </a>
     </div>
 
@@ -183,13 +252,12 @@
         <p>© 2025 ShopSyncAI | Усі права захищено</p>
     </div>
 
-    <!-- Підключення Supabase і скрипт -->
+    <!-- Supabase і скрипт -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const { createClient } = supabase;
         const supabaseClient = createClient('твій_supabase_url', 'твій_supabase_key');
 
-        // Завантаження товарів
         async function loadProducts() {
             const { data, error } = await supabaseClient.from('products').select('*');
             if (error) {
@@ -206,9 +274,9 @@
                 const productDiv = document.createElement('div');
                 productDiv.className = 'product';
                 productDiv.innerHTML = `
-                    <img src="${product.image_url || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${product.title}">
+                    <img src="${product.image_url || 'https://via.placeholder.com/300x180?text=No+Image'}" alt="${product.title}">
                     <h3>${product.title}</h3>
-                    <p>${product.description.slice(0, 100)}...</p>
+                    <p>${product.description.slice(0, 80)}...</p>
                     <p>Ціна: ${product.price}</p>
                     <p>Продавець: @${product.seller_username}</p>
                     <a href="https://t.me/${product.seller_username}" target="_blank">Купити</a>
@@ -219,7 +287,6 @@
             addRandomAds();
         }
 
-        // Функція для додавання рандомних реклам
         function addRandomAds() {
             const products = document.querySelectorAll('.product');
             const adLinks = [
@@ -236,9 +303,9 @@
                 adDiv.className = 'ad-inline';
                 adDiv.innerHTML = `
                     <a href="${adLinks[i]}" target="_blank">
-                        <img src="https://via.placeholder.com/300x200?text=Ad+${i+1}" alt="Реклама ${i+1}">
+                        <img src="https://via.placeholder.com/300x180?text=Ad+${i+1}" alt="Реклама ${i+1}">
                         <h3>Супер пропозиція!</h3>
-                        <p>Відвідай наш магазин для найкращих цін!</p>
+                        <p>Кращі ціни в магазині!</p>
                         <span>Дізнатися більше</span>
                     </a>
                 `;
@@ -247,7 +314,6 @@
             }
         }
 
-        // Фільтри та пошук
         async function loadProductsWithFilters() {
             const category = document.getElementById('categoryFilter').value;
             const search = document.getElementById('search').value.toLowerCase();
@@ -275,9 +341,9 @@
                 const productDiv = document.createElement('div');
                 productDiv.className = 'product';
                 productDiv.innerHTML = `
-                    <img src="${product.image_url || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${product.title}">
+                    <img src="${product.image_url || 'https://via.placeholder.com/300x180?text=No+Image'}" alt="${product.title}">
                     <h3>${product.title}</h3>
-                    <p>${product.description.slice(0, 100)}...</p>
+                    <p>${product.description.slice(0, 80)}...</p>
                     <p>Ціна: ${product.price}</p>
                     <p>Продавець: @${product.seller_username}</p>
                     <a href="https://t.me/${product.seller_username}" target="_blank">Купити</a>
@@ -288,11 +354,9 @@
             addRandomAds();
         }
 
-        // Події
         document.getElementById('categoryFilter').addEventListener('change', loadProductsWithFilters);
         document.getElementById('search').addEventListener('input', loadProductsWithFilters);
 
-        // Завантаження при старті
         loadProducts();
     </script>
 </body>
